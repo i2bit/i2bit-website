@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "404": "404.html",
     "public": ".",
     "ignore": [
       "firebase.json",
@@ -10,7 +11,6 @@
       "license.txt"
     ],
     "cleanUrls": true,
-    "trailingSlash": false,
-    "404": "404.html"
+    "trailingSlash": false
   }
 }
