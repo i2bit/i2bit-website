@@ -1,0 +1,417 @@
+<function_calls>
+    <invoke name="artifacts">
+        <parameter name="id">contact-form</parameter>
+        <parameter name="type">text/html</parameter>
+        <parameter name="title">i2bit - Kontaktformular</parameter>
+        <parameter name="command">create</parameter>
+        <parameter name="content">
+            <!DOCTYPE html>
+            <html lang="de">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>i2bit - Kontaktformular</title>
+                <style>
+                    /* Reset und Basis-Styling */
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                        font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                    }
+
+                    body {
+                        color: #1d1d1f;
+                        background-color: #f5f5f7;
+                        line-height: 1.5;
+                    }
+
+                    /* Container */
+                    .container {
+                        max-width: 800px;
+                        margin: 60px auto;
+                        padding: 40px;
+                        background: white;
+                        border-radius: 18px;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+                    }
+
+                    /* Header */
+                    header {
+                        text-align: center;
+                        margin-bottom: 40px;
+                    }
+
+                    .logo {
+                        font-size: 28px;
+                        font-weight: 600;
+                        color: #0066cc;
+                        text-decoration: none;
+                        margin-bottom: 10px;
+                        display: block;
+                    }
+
+                    h1 {
+                        font-size: 36px;
+                        font-weight: 700;
+                        margin-bottom: 15px;
+                        background: linear-gradient(120deg, #0066cc, #5ac8fa);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    .subtitle {
+                        font-size: 18px;
+                        font-weight: 400;
+                        color: #86868b;
+                        max-width: 600px;
+                        margin: 0 auto 30px;
+                    }
+
+                    /* Form Styling */
+                    .contact-form {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 20px;
+                    }
+
+                    .form-group {
+                        margin-bottom: 15px;
+                    }
+
+                    .form-group.full-width {
+                        grid-column: span.2;
+                    }
+
+                    .form-group label {
+                        display: block;
+                        margin-bottom: 8px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: #424245;
+                    }
+
+                    .form-group input,
+                    .form-group textarea,
+                    .form-group select {
+                        width: 100%;
+                        padding: 12px 15px;
+                        font-size: 16px;
+                        border: 1px solid #d2d2d7;
+                        border-radius: 12px;
+                        background-color: #ffffff;
+                        transition: all 0.3s ease;
+                    }
+
+                    .form-group input:focus,
+                    .form-group textarea:focus,
+                    .form-group select:focus {
+                        outline: none;
+                        border-color: #0066cc;
+                        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+                    }
+
+                    .form-group textarea {
+                        min-height: 150px;
+                        resize: vertical;
+                    }
+
+                    /* Buttons */
+                    .btn {
+                        display: inline-block;
+                        padding: 12px 30px;
+                        font-size: 17px;
+                        font-weight: 500;
+                        text-decoration: none;
+                        border-radius: 980px;
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                        border: none;
+                    }
+
+                    .btn-primary {
+                        background-color: #0066cc;
+                        color: white;
+                    }
+
+                    .btn-primary:hover {
+                        background-color: #0077e6;
+                        transform: translateY(-2px);
+                    }
+
+                    .btn-secondary {
+                        background-color: transparent;
+                        color: #0066cc;
+                        margin-left: 15px;
+                    }
+
+                    .btn-secondary:hover {
+                        text-decoration: underline;
+                    }
+
+                    .form-buttons {
+                        grid-column: span 2;
+                        margin-top: 20px;
+                        text-align: right;
+                    }
+
+                    /* Success Message */
+                    .success-message {
+                        display: none;
+                        text-align: center;
+                        padding: 30px;
+                        background-color: #f2f9ff;
+                        border-radius: 12px;
+                        margin-top: 30px;
+                    }
+
+                    .success-message h3 {
+                        font-size: 24px;
+                        color: #0066cc;
+                        margin-bottom: 15px;
+                    }
+
+                    .success-message p {
+                        color: #515154;
+                        margin-bottom: 20px;
+                    }
+
+                    /* Error styles */
+                    .error {
+                        color: #ff3b30;
+                        font-size: 13px;
+                        margin-top: 5px;
+                        display: none;
+                    }
+
+                    input.error-field,
+                    textarea.error-field,
+                    select.error-field {
+                        border-color: #ff3b30;
+                    }
+
+                    /* Responsive */
+                    @media (max-width: 768px) {
+                        .container {
+                            padding: 30px 20px;
+                            margin: 20px;
+                        }
+
+                        .contact-form {
+                            grid-template-columns: 1fr;
+                        }
+
+                        .form-group.full-width {
+                            grid-column: span 1;
+                        }
+
+                        .form-buttons {
+                            grid-column: span 1;
+                            text-align: center;
+                        }
+
+                        .btn {
+                            width: 100%;
+                            margin-bottom: 10px;
+                        }
+
+                        .btn-secondary {
+                            margin-left: 0;
+                        }
+                    }
+                </style>
+            </head>
+
+            <body>
+                <div class="container">
+                    <header>
+                        <a href="index.html" class="logo">i2bit</a>
+                        <h1>Kontaktieren Sie uns</h1>
+                        <p class="subtitle">Haben Sie Fragen oder möchten Sie mehr über unsere Leistungen erfahren?
+                            Füllen Sie das
+                            Formular aus, und wir melden uns umgehend bei Ihnen.</p>
+                    </header>
+                    <form id="contactForm" class="contact-form" action="https://formsubmit.co/info@i2bit.deinthusan@gunasiri.de"
+                        method="POST">
+                        <!-- FormSubmit Email Handler - IHRE-EMAIL@DOMAIN.DE durch Ihre eigene Email ersetzen -->
+                        <!-- Honeypot zum Spam-Schutz -->
+                        <input type="text" name="_honey" style="display:none">
+                        <!-- Disable Captcha -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- Erfolgsseite anpassen (optional) -->
+                        <input type="hidden" name="_next" value="https://ihre-website.de/danke.html">
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="error" id="nameError">Bitte geben Sie Ihren Namen ein.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error" id="emailError">Bitte geben Sie eine gültige E-Mail-Adresse ein.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefon (optional)</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Unternehmen (optional)</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="subject">Betreff</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Bitte wählen...</option>
+                                <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+                                <option value="Softwareentwicklung">Softwareentwicklung</option>
+                                <option value="Cloud-Lösungen">Cloud-Lösungen</option>
+                                <option value="IT-Sicherheit">IT-Sicherheit</option>
+                                <option value="Beratung">Beratung</option>
+                                <option value="Support">Support</option>
+                                <option value="Sonstiges">Sonstiges</option>
+                            </select>
+                            <div class="error" id="subjectError">Bitte wählen Sie einen Betreff aus.</div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="message">Nachricht</label>
+                            <textarea id="message" name="message" required></textarea>
+                            <div class="error" id="messageError">Bitte geben Sie Ihre Nachricht ein.</div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="datenschutz">
+                                <input type="checkbox" id="datenschutz" name="datenschutz" required>
+                                Ich stimme zu, dass meine Angaben zur Kontaktaufnahme und für Rückfragen gespeichert
+                                werden. Details finden
+                                Sie in unserer <a href="#" style="color: #0066cc;">Datenschutzerklärung</a>.
+                            </label>
+                            <div class="error" id="datenschutzError">Bitte akzeptieren Sie die Datenschutzbestimmungen.
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-primary">Absenden</button>
+                            <button type="reset" class="btn btn-secondary">Zurücksetzen</button>
+                        </div>
+                    </form>
+
+                    <div class="success-message" id="successMessage">
+                        <h3>Vielen Dank für Ihre Nachricht!</h3>
+                        <p>Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.</p>
+                        <a href="index.html" class="btn btn-primary">Zurück zur Startseite</a>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const form = document.getElementById('contactForm');
+                        const successMessage = document.getElementById('successMessage');
+
+                        // Form validation
+                        form.addEventListener('submit', function (e) {
+                            // Prevent the form from submitting
+                            let valid = true;
+
+                            // Check name
+                            const name = document.getElementById('name');
+                            const nameError = document.getElementById('nameError');
+                            if (!name.value.trim()) {
+                                name.classList.add('error-field');
+                                nameError.style.display = 'block';
+                                valid = false;
+                            } else {
+                                name.classList.remove('error-field');
+                                nameError.style.display = 'none';
+                            }
+
+                            // Check email
+                            const email = document.getElementById('email');
+                            const emailError = document.getElementById('emailError');
+                            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!email.value.trim() || !emailPattern.test(email.value)) {
+                                email.classList.add('error-field');
+                                emailError.style.display = 'block';
+                                valid = false;
+                            } else {
+                                email.classList.remove('error-field');
+                                emailError.style.display = 'none';
+                            }
+
+                            // Check subject
+                            const subject = document.getElementById('subject');
+                            const subjectError = document.getElementById('subjectError');
+                            if (subject.value === '') {
+                                subject.classList.add('error-field');
+                                subjectError.style.display = 'block';
+                                valid = false;
+                            } else {
+                                subject.classList.remove('error-field');
+                                subjectError.style.display = 'none';
+                            }
+
+                            // Check message
+                            const message = document.getElementById('message');
+                            const messageError = document.getElementById('messageError');
+                            if (!message.value.trim()) {
+                                message.classList.add('error-field');
+                                messageError.style.display = 'block';
+                                valid = false;
+                            } else {
+                                message.classList.remove('error-field');
+                                messageError.style.display = 'none';
+                            }
+
+                            // Check datenschutz
+                            const datenschutz = document.getElementById('datenschutz');
+                            const datenschutzError = document.getElementById('datenschutzError');
+                            if (!datenschutz.checked) {
+                                datenschutzError.style.display = 'block';
+                                valid = false;
+                            } else {
+                                datenschutzError.style.display = 'none';
+                            }
+
+                            // If not valid, prevent form submission
+                            if (!valid) {
+                                e.preventDefault();
+                            }
+
+                            // For demo purposes - show success message
+                            // Uncomment this in production when using formsubmit.co
+                            /*
+                            if (valid) {
+                                e.preventDefault(); // Only for demo
+                                form.style.display = 'none';
+                                successMessage.style.display = 'block';
+                            }
+                            */
+                        });
+
+                        // Reset error states on form reset
+                        form.addEventListener('reset', function () {
+                            const errorMessages = document.querySelectorAll('.error');
+                            const fields = document.querySelectorAll('input, textarea, select');
+
+                            errorMessages.forEach(error => {
+                                error.style.display = 'none';
+                            });
+
+                            fields.forEach(field => {
+                                field.classList.remove('error-field');
+                            });
+                        });
+                    });
+                </script>
+            </body>
+
+            </html>
+        </parameter>
+    </invoke>
+</function_calls>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i2bit Enterprise Suite - Business Software</title>
+    <style>
+        /* Basis-Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: #1d1d1f;
+            background-color: #f5f5f7;
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 80px 20px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #86868b;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            padding: 20px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: #86868b;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+            background-color: #0066cc;
+            text-decoration: none;
+            border-radius: 980px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0077e6;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f7;
+            color: #86868b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo">i2bit</a>
+    </header>
+
+    <div class="content">
+        <section class="hero">
+            <h1>i2bit Enterprise Suite</h1>
+            <p>Eine umfassende Softwarelösung, die alle Geschäftsprozesse Ihres Unternehmens nahtlos integriert. Von der
+                Kundenbetreuung bis zur Buchhaltung – alles in einer intuitiven Plattform.</p>
+        </section>
+
+        <section id="features">
+            <h2>Funktionen der i2bit Enterprise Suite</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Kundenmanagement</h3>
+                    <p>Verwalten Sie Ihre Kundenbeziehungen effizient und zentralisiert.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Finanzbuchhaltung</h3>
+                    <p>Automatisieren Sie Ihre Buchhaltungsprozesse und behalten Sie den Überblick.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Projektmanagement</h3>
+                    <p>Planen und verfolgen Sie Projekte mit leistungsstarken Tools.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Berichtswesen</h3>
+                    <p>Erstellen Sie detaillierte Berichte und gewinnen Sie wertvolle Einblicke.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2025 i2bit GmbH. Alle Rechte vorbehalten.
+    </footer>
+</body>
+
+</html>
