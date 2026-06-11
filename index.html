@@ -55,6 +55,7 @@
             font-weight: 600;
             color: #0066cc;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .nav-links {
@@ -67,15 +68,27 @@
         }
 
         .nav-links a {
-            color: #1d1d1f;
+            color: white;
             text-decoration: none;
             font-size: 14px;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            opacity: 0.9;
+            transition: color 0.3s ease, opacity 0.3s ease;
         }
 
         .nav-links a:hover {
             opacity: 1;
+        }
+
+        header.scrolled .nav-links a {
+            color: #1d1d1f;
+        }
+
+        .logo {
+            transition: color 0.3s ease;
+        }
+
+        header:not(.scrolled) .logo {
+            color: white;
         }
 
         .hamburger {
@@ -91,9 +104,13 @@
             display: block;
             width: 22px;
             height: 2px;
-            background: #1d1d1f;
+            background: white;
             border-radius: 2px;
             transition: all 0.3s ease;
+        }
+
+        header.scrolled .hamburger span {
+            background: #1d1d1f;
         }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
@@ -863,12 +880,11 @@
                 const yPct = 50 + scrollPosition * 0.015;
                 heroImage.style.backgroundPosition = `center ${yPct}%`;
 
-                // Bild ausblenden sobald Hero-Section verlassen
-                if (scrollPosition > heroSection.offsetHeight) {
-                    heroImage.style.opacity = '0';
-                } else {
-                    heroImage.style.opacity = '1';
-                }
+                // Bild sanft ausblenden ab 70% der Hero-Höhe
+                const fadeStart = heroSection.offsetHeight * 0.7;
+                const fadeEnd = heroSection.offsetHeight;
+                const opacity = Math.max(0, 1 - (scrollPosition - fadeStart) / (fadeEnd - fadeStart));
+                heroImage.style.opacity = opacity;
             }, { passive: true });
 
             // Copyright year
@@ -879,16 +895,20 @@
                 document.getElementById('cookie-banner').style.display = 'flex';
             }
 
-            // Header transparency effect
+            // Header transparency + nav color effect
             const header = document.querySelector('header');
 
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 10) {
+            function updateHeader() {
+                if (window.scrollY > 60) {
                     header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                    header.classList.add('scrolled');
                 } else {
-                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0)';
+                    header.classList.remove('scrolled');
                 }
-            });
+            }
+            window.addEventListener('scroll', updateHeader);
+            updateHeader();
         });
 
         // Hamburger menu
