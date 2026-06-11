@@ -8,6 +8,9 @@
       ".gitignore",
       "README.md",
       "license.txt"
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "404": "404.html"
   }
 }

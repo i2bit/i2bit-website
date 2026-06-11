@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dynamic.html
+
+Sitemap: https://i2bit.de/sitemap.xml

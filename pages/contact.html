@@ -219,21 +219,18 @@
 <body>
     <div class="container">
         <header>
-            <a href="index.html" class="logo">i2bit</a>
+            <a href="../index.html" class="logo">i2bit</a>
             <h1>Kontaktieren Sie uns</h1>
             <p class="subtitle">Haben Sie Fragen oder möchten Sie mehr über unsere Leistungen erfahren?
                 Füllen Sie das
                 Formular aus, und wir melden uns umgehend bei Ihnen.</p>
         </header>
-        <form id="contactForm" class="contact-form" action="https://formsubmit.co/info@i2bit.deinthusan@gunasiri.de"
+        <form id="contactForm" class="contact-form" action="https://formsubmit.co/info@i2bit.de"
             method="POST">
-            <!-- FormSubmit Email Handler - IHRE-EMAIL@DOMAIN.DE durch Ihre eigene Email ersetzen -->
-            <!-- Honeypot zum Spam-Schutz -->
             <input type="text" name="_honey" style="display:none">
-            <!-- Disable Captcha -->
             <input type="hidden" name="_captcha" value="false">
-            <!-- Erfolgsseite anpassen (optional) -->
-            <input type="hidden" name="_next" value="https://ihre-website.de/danke.html">
+            <input type="hidden" name="_subject" value="Neue Kontaktanfrage – i2bit">
+            <input type="hidden" name="_next" value="https://i2bit.de/pages/danke.html">
 
             <div class="form-group">
                 <label for="name">Name</label>
@@ -282,8 +279,7 @@
                 <label for="datenschutz">
                     <input type="checkbox" id="datenschutz" name="datenschutz" required>
                     Ich stimme zu, dass meine Angaben zur Kontaktaufnahme und für Rückfragen gespeichert
-                    werden. Details finden
-                    Sie in unserer <a href="#" style="color: #0066cc;">Datenschutzerklärung</a>.
+                    werden. Details finden Sie in unserer <a href="datenschutz.html" style="color: #0066cc;">Datenschutzerklärung</a>.
                 </label>
                 <div class="error" id="datenschutzError">Bitte akzeptieren Sie die Datenschutzbestimmungen.
                 </div>
@@ -298,7 +294,7 @@
         <div class="success-message" id="successMessage">
             <h3>Vielen Dank für Ihre Nachricht!</h3>
             <p>Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.</p>
-            <a href="index.html" class="btn btn-primary">Zurück zur Startseite</a>
+            <a href="../index.html" class="btn btn-primary">Zurück zur Startseite</a>
         </div>
     </div>
 

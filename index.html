@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i2bit - Digitale Innovation</title>
+    <title>i2bit – Softwareentwicklung, Web & App, IT-Consulting</title>
+    <meta name="description" content="i2bit unterstützt Unternehmen in der Schweiz mit massgeschneiderter Softwareentwicklung, Webseiten, App-Entwicklung und IT-Consulting.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="i2bit – Digitale Lösungen aus der Schweiz">
+    <meta property="og:description" content="Softwareentwicklung, Web & App-Entwicklung und IT-Consulting für Ihr Projekt.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_CH">
     <style>
         /* Reset und Basis-Styling */
         * {
@@ -72,6 +78,50 @@
             opacity: 1;
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #1d1d1f;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 48px;
+                left: 0;
+                right: 0;
+                background: rgba(255,255,255,0.97);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 16px 0;
+                border-bottom: 1px solid rgba(0,0,0,0.08);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { margin: 0; }
+            .nav-links a {
+                display: block;
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+
         /* Hero Section */
         .hero {
             padding-top: 48px;
@@ -133,7 +183,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            background-image: url('herobereich.jpg');
+            background-image: url('assets/images/herobereich.jpg');
             background-size: cover;
             background-position: center 50%;
             z-index: 0;
@@ -464,6 +514,50 @@
             }
         }
 
+        /* Cookie Banner */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(29, 29, 31, 0.95);
+            color: #f5f5f7;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 9999;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+        #cookie-banner p { margin: 0; opacity: 0.85; max-width: 700px; }
+        #cookie-banner p a { color: #5ac8fa; text-decoration: none; }
+        #cookie-banner p a:hover { text-decoration: underline; }
+        .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+        .cookie-accept {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 980px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .cookie-accept:hover { background: #0077e6; }
+        .cookie-decline {
+            background: transparent;
+            color: #f5f5f7;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 20px;
+            border-radius: 980px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            #cookie-banner { flex-direction: column; align-items: flex-start; }
+        }
+
         /* Apple-like scroll animations */
         .fade-in {
             opacity: 0;
@@ -490,16 +584,28 @@
 </head>
 
 <body>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" style="display:none;">
+        <p>Wir verwenden Cookies, um Ihnen das beste Erlebnis auf unserer Website zu bieten. Mehr erfahren in unserer <a href="pages/datenschutz.html#cookies">Cookie-Richtlinie</a>.</p>
+        <div class="cookie-actions">
+            <button class="cookie-decline" onclick="cookieConsent(false)">Ablehnen</button>
+            <button class="cookie-accept" onclick="cookieConsent(true)">Akzeptieren</button>
+        </div>
+    </div>
+
     <!-- Header & Navigation -->
     <header>
         <nav>
             <a href="#" class="logo">i2bit</a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#products">Produkte</a></li>
                 <li><a href="#contact">Kontakt</a></li>
                 <li><a href="#about">Über uns</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
@@ -510,10 +616,10 @@
         <div class="hero-gradient"></div>
 
         <div class="hero-content">
-            <img src="i2bit.jpeg" alt="i2bit Logo"
+            <img src="assets/images/i2bit.jpeg" alt="i2bit Logo"
                 style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
-            <h1>Digitale Innovation neu definiert</h1>
-            <h2 style="color: #ffffff;">Entdecken Sie innovative IT-Lösungen, die Ihr Unternehmen transformieren.</h2>
+            <h1>Software. Web. Apps. Consulting.</h1>
+            <h2 style="color: #ffffff;">Wir entwickeln massgeschneiderte digitale Lösungen und unterstützen Ihr Projekt von der Idee bis zum Launch.</h2>
             <div>
                 <a href="#contact" class="btn btn-primary">Kontakt aufnehmen</a>
                 <a href="#features" class="btn btn-secondary" style="color: white;">Mehr erfahren</a>
@@ -527,36 +633,36 @@
             <h2 class="section-title fade-in">Unsere Kernkompetenzen</h2>
             <div class="features-grid">
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">💻</div>
+                    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0066cc" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><polyline points="7 9 10 12 7 15" stroke="#0066cc" stroke-width="1.5" fill="none"/><line x1="13" y1="15" x2="17" y2="15"/></svg></div>
                     <h3 class="feature-title">Softwareentwicklung</h3>
                     <p class="feature-desc">Maßgeschneiderte Softwarelösungen, die perfekt auf Ihre
                         Geschäftsanforderungen zugeschnitten sind.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">🔒</div>
+                    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0066cc" stroke-width="1.5"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
                     <h3 class="feature-title">IT-Sicherheit</h3>
                     <p class="feature-desc">Umfassende Sicherheitskonzepte zum Schutz Ihrer wertvollen
                         Unternehmensdaten.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">📱</div>
+                    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0066cc" stroke-width="1.5"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18" stroke-linecap="round"/></svg></div>
                     <h3 class="feature-title">Mobile Apps</h3>
                     <p class="feature-desc">Native und Cross-Platform Anwendungen für iOS und Android mit höchstem
                         Nutzererlebnis.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">☁️</div>
+                    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0066cc" stroke-width="1.5"><path d="M18 10a6 6 0 10-11.9 1A5 5 0 106 20h12a4 4 0 000-8z"/></svg></div>
                     <h3 class="feature-title">Cloud-Lösungen</h3>
                     <p class="feature-desc">Skalierbare Cloud-Architekturen für maximale Flexibilität und Effizienz.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0066cc" stroke-width="1.5"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg></div>
                     <h3 class="feature-title">Datenanalyse</h3>
                     <p class="feature-desc">Gewinnen Sie wertvolle Einblicke aus Ihren Daten durch moderne
                         Analysemethoden.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">🔄</div>
+                    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0066cc" stroke-width="1.5"><path d="M4 12v-1a8 8 0 0116 0"/><polyline points="20 7 20 11 16 11"/><path d="M20 12v1a8 8 0 01-16 0"/><polyline points="4 17 4 13 8 13"/></svg></div>
                     <h3 class="feature-title">Digitale Transformation</h3>
                     <p class="feature-desc">Begleitung Ihres Unternehmens auf dem Weg in die digitale Zukunft.</p>
                 </div>
@@ -571,7 +677,7 @@
 
             <div class="product-showcase">
                 <div class="product-image">
-                    <img src="i2bitkonzeptprodukt.jpeg" alt="i2bit Enterprise Suite">
+                    <img src="assets/images/i2bitkonzeptprodukt.jpeg" alt="i2bit Enterprise Suite">
                 </div>
                 <div class="product-info">
                     <span class="product-category">Business Software</span>
@@ -580,13 +686,13 @@
                         Unternehmens nahtlos integriert. Von der Kundenbetreuung bis zur Buchhaltung – alles in einer
                         intuitiven Plattform.
                     </p>
-                    <a href="enterprise.html" class="btn btn-primary">Mehr erfahren</a>
+                    <a href="pages/enterprise.html" class="btn btn-primary">Mehr erfahren</a>
                 </div>
             </div>
 
             <div class="product-showcase">
                 <div class="product-image">
-                    <img src="i2bit secure.jpeg" alt=" i2bit Secure Cloud">
+                    <img src="assets/images/i2bit-secure.jpeg" alt=" i2bit Secure Cloud">
                 </div>
                 <div class="product-info">
                     <span class="product-category">Cloud-Dienste</span>
@@ -594,13 +700,13 @@
                     <p class="product-desc">Unsere sichere Cloud-Lösung bietet höchste Datensicherheit bei maximaler
                         Verfügbarkeit. Hosten Sie Ihre kritischen Anwendungen und Daten in einer zuverlässigen Umgebung.
                     </p>
-                    <a href="secure.html" class="btn btn-primary">Mehr erfahren</a>
+                    <a href="pages/secure.html" class="btn btn-primary">Mehr erfahren</a>
                 </div>
             </div>
 
             <div class="product-showcase">
                 <div class="product-image">
-                    <img src="i2bit analytics.jpeg" alt="i2bit Analytics Platform">
+                    <img src="assets/images/i2bit-analytics.jpeg" alt="i2bit Analytics Platform">
                 </div>
                 <div class="product-info">
                     <span class="product-category">Datenanalyse</span>
@@ -608,7 +714,7 @@
                     <p class="product-desc">Verwandeln Sie Ihre Daten in wertvolle Erkenntnisse. Unsere
                         Analytics-Plattform bietet leistungsstarke Werkzeuge zur Visualisierung und Analyse Ihrer
                         Geschäftsdaten.</p>
-                    <a href="product.html" class="btn btn-primary">Mehr erfahren</a>
+                    <a href="pages/product.html" class="btn btn-primary">Mehr erfahren</a>
                 </div>
             </div>
         </div>
@@ -621,7 +727,7 @@
             <h2>Bereit für die digitale Zukunft?</h2>
             <p>Kontaktieren Sie uns noch heute und entdecken Sie, wie wir Ihr Unternehmen mit innovativen IT-Lösungen
                 transformieren können.</p>
-            <a href="contact.html" class="btn btn-cta">Kontakt aufnehmen</a>
+            <a href="pages/contact.html" class="btn btn-cta">Kontakt aufnehmen</a>
         </div>
     </section><!-- Footer -->
     <footer id="about">
@@ -630,15 +736,15 @@
                 <div class="footer-column">
                     <h4>i2bit</h4>
                     <ul class="footer-links">
-                        <li><a href="dynamic.html?title=Über%20uns&description=Erfahren%20Sie%20mehr%20über%20i2bit.">Über
-                                uns</a></li>
+                        <!-- TODO: Echte "Über uns"-Seite erstellen (ueber-uns.html) mit Gründungsgeschichte, Team, Mission -->
+                        <!-- <li><a href="ueber-uns.html">Über uns</a></li> -->
                         <li><a
-                                href="dynamic.html?title=Karriere&description=Werden%20Sie%20Teil%20unseres%20Teams.">Karriere</a>
+                                href="pages/dynamic.html?title=Karriere&description=Werden%20Sie%20Teil%20unseres%20Teams.">Karriere</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=News&description=Bleiben%20Sie%20auf%20dem%20Laufenden%20mit%20unseren%20Neuigkeiten.">News</a>
+                                href="pages/dynamic.html?title=News&description=Bleiben%20Sie%20auf%20dem%20Laufenden%20mit%20unseren%20Neuigkeiten.">News</a>
                         </li>
-                        <li><a href="contact.html">Kontakt</a>
+                        <li><a href="pages/contact.html">Kontakt</a>
                         </li>
                     </ul>
                 </div>
@@ -646,16 +752,16 @@
                     <h4>Leistungen</h4>
                     <ul class="footer-links">
                         <li><a
-                                href="dynamic.html?title=Softwareentwicklung&description=Maßgeschneiderte%20Softwarelösungen%20für%20Ihr%20Unternehmen.">Softwareentwicklung</a>
+                                href="pages/dynamic.html?title=Softwareentwicklung&description=Maßgeschneiderte%20Softwarelösungen%20für%20Ihr%20Unternehmen.">Softwareentwicklung</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=IT-Sicherheit&description=Schützen%20Sie%20Ihre%20Daten%20mit%20unseren%20Sicherheitslösungen.">IT-Sicherheit</a>
+                                href="pages/dynamic.html?title=IT-Sicherheit&description=Schützen%20Sie%20Ihre%20Daten%20mit%20unseren%20Sicherheitslösungen.">IT-Sicherheit</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=Cloud-Lösungen&description=Skalierbare%20und%20zuverlässige%20Cloud-Architekturen.">Cloud-Lösungen</a>
+                                href="pages/dynamic.html?title=Cloud-Lösungen&description=Skalierbare%20und%20zuverlässige%20Cloud-Architekturen.">Cloud-Lösungen</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=Mobile%20Apps&description=Innovative%20Apps%20für%20iOS%20und%20Android.">Mobile
+                                href="pages/dynamic.html?title=Mobile%20Apps&description=Innovative%20Apps%20für%20iOS%20und%20Android.">Mobile
                                 Apps</a></li>
                     </ul>
                 </div>
@@ -663,43 +769,33 @@
                     <h4>Support</h4>
                     <ul class="footer-links">
                         <li><a
-                                href="dynamic.html?title=Kundenportal&description=Zugriff%20auf%20Ihre%20persönlichen%20Daten%20und%20Services.">Kundenportal</a>
+                                href="pages/dynamic.html?title=Kundenportal&description=Zugriff%20auf%20Ihre%20persönlichen%20Daten%20und%20Services.">Kundenportal</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=Dokumentation&description=Umfassende%20Anleitungen%20und%20Ressourcen.">Dokumentation</a>
+                                href="pages/dynamic.html?title=Dokumentation&description=Umfassende%20Anleitungen%20und%20Ressourcen.">Dokumentation</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=FAQ&description=Antworten%20auf%20häufig%20gestellte%20Fragen.">FAQ</a>
+                                href="pages/dynamic.html?title=FAQ&description=Antworten%20auf%20häufig%20gestellte%20Fragen.">FAQ</a>
                         </li>
                         <li><a
-                                href="dynamic.html?title=Schulungen&description=Erweitern%20Sie%20Ihr%20Wissen%20mit%20unseren%20Kursen.">Schulungen</a>
+                                href="pages/dynamic.html?title=Schulungen&description=Erweitern%20Sie%20Ihr%20Wissen%20mit%20unseren%20Kursen.">Schulungen</a>
                         </li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Rechtliches</h4>
                     <ul class="footer-links">
-                        <li><a
-                                href="dynamic.html?title=Impressum&description=Rechtliche%20Informationen%20zu%20i2bit.">Impressum</a>
-                        </li>
-                        <li><a
-                                href="dynamic.html?title=Datenschutz&description=Erfahren%20Sie%20mehr%20über%20unsere%20Datenschutzrichtlinien.">Datenschutz</a>
-                        </li>
-                        <li><a
-                                href="dynamic.html?title=AGB&description=Unsere%20Allgemeinen%20Geschäftsbedingungen.">AGB</a>
-                        </li>
-                        <li><a
-                                href="dynamic.html?title=Cookie-Richtlinie&description=Informationen%20zu%20unserer%20Nutzung%20von%20Cookies.">Cookie-Richtlinie</a>
-                        </li>
+                        <li><a href="pages/impressum.html">Impressum</a></li>
+                        <li><a href="pages/datenschutz.html">Datenschutz</a></li>
+                        <li><a href="pages/agb.html">AGB</a></li>
+                        <li><a href="pages/datenschutz.html#cookies">Cookie-Richtlinie</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 i2bit. Alle Rechte vorbehalten.</p>
+                <p>&copy; <span id="year"></span> i2bit. Alle Rechte vorbehalten.</p>
                 <div class="social-icons">
-                    <a href="#" aria-label="LinkedIn">in</a>
-                    <a href="#" aria-label="Twitter">X</a>
-                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="https://www.linkedin.com/company/22305750" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
                 </div>
             </div>
         </div>
@@ -775,6 +871,14 @@
                 }
             }, { passive: true });
 
+            // Copyright year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Cookie banner
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+            }
+
             // Header transparency effect
             const header = document.querySelector('header');
 
@@ -786,6 +890,25 @@
                 }
             });
         });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        function cookieConsent(accepted) {
+            localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
     </script>
 </body>
 
