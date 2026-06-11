@@ -1,0 +1,24 @@
+RewriteEngine On
+
+# 1. HTTPS erzwingen
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. .html-Endung ausblenden
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+?)/?$ $1.html [L]
+
+# 3. Bilddateien (PNG, JPG, JPEG, GIF, WEBP) korrekt servieren
+<FilesMatch "\.(png|jpg|jpeg|gif|webp)$">
+  Require all granted
+</FilesMatch>
+
+# 4. Optional: Browser-Caching für Bilder aktivieren (Performance)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+</IfModule>
